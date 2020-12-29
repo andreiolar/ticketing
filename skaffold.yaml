@@ -16,3 +16,15 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: andreiolar/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.js"
+            dest: .
+          - src: "**/*.ts"
+            dest: .
+          - src: "**/*.tsx"
+            dest: .
