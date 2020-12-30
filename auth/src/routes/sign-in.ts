@@ -1,11 +1,10 @@
 import express, { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { body } from "express-validator";
+import { validateRequest, BadRequestError } from "@ao-ticketing/common";
 
 import { Password } from "../services/password";
 import { User } from "../models/User";
-import { validateRequest } from "../middlewares/validate-request";
-import { BadRequestError } from "../errors/bad-request-error";
 
 const router = express.Router();
 
