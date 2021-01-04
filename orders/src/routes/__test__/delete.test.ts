@@ -3,6 +3,7 @@ import request from "supertest";
 import { app } from "../../app";
 import { OrderStatus } from "../../models/order";
 import { Ticket } from "../../models/ticket";
+import { natsWrapper } from "../../nats-wrapper";
 
 it("marks an order as canelled", async () => {
   const ticket = Ticket.build({ title: "concert", price: 20 });
@@ -30,6 +31,6 @@ it("marks an order as canelled", async () => {
     .expect(200);
 
   expect(fetchedOrder.status).toEqual(OrderStatus.Cancelled);
-});
 
-it.todo("emits an order cancellation event");
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+});
