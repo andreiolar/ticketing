@@ -1,4 +1,5 @@
 import request from "supertest";
+import mongoose from "mongoose";
 
 import { app } from "../../app";
 import { OrderStatus } from "../../models/order";
@@ -6,7 +7,11 @@ import { Ticket } from "../../models/ticket";
 import { natsWrapper } from "../../nats-wrapper";
 
 it("marks an order as canelled", async () => {
-  const ticket = Ticket.build({ title: "concert", price: 20 });
+  const ticket = Ticket.build({
+    title: "concert",
+    price: 20,
+    id: mongoose.Types.ObjectId().toHexString(),
+  });
 
   await ticket.save();
 
