@@ -13,10 +13,14 @@ function useRequest(params: RequestAttrs) {
 
   const [errors, setErrors] = useState<React.ReactNode | null>(null);
 
-  const doRequest = async () => {
+  const doRequest = async (props = {}) => {
     try {
       setErrors(null);
-      const response = await axios.request({ method, url, data });
+      const response = await axios.request({
+        method,
+        url,
+        data: { ...data, ...props },
+      });
 
       onSuccess(response.data);
 
