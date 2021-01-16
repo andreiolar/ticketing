@@ -19,6 +19,7 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - run: docker push andreiolar/auth
   deploy:
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - uses: digitalocean/action-doctl@v2
